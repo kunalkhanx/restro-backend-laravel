@@ -21,6 +21,7 @@ Route::prefix('/items')->group(function(){
     Route::get('/', [\App\Http\Controllers\ItemController::class, 'all']);
     Route::post('/', [\App\Http\Controllers\ItemController::class, 'create']);
     Route::get('/image/{item}', [\App\Http\Controllers\ItemController::class, 'image']);
+    Route::delete('/{item}',  [\App\Http\Controllers\ItemController::class, 'delete'] );
 });
 
 
@@ -35,3 +36,11 @@ Route::prefix('/tables')->group(function(){
     Route::get('/', [\App\Http\Controllers\TableController::class, 'all']);
     Route::post('/', [\App\Http\Controllers\TableController::class, 'create']);
 });
+
+Route::prefix('/orders')->group(function(){
+    Route::post('/', [\App\Http\Controllers\OrderController::class, 'create']);
+    Route::get('/', [\App\Http\Controllers\OrderController::class, 'browse']);
+    Route::get('/{order}', [\App\Http\Controllers\OrderController::class, 'get']);
+});
+
+

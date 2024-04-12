@@ -11,6 +11,6 @@ class Item extends Model
     use HasFactory;
 
     public function orders():BelongsToMany{
-        return $this->belongsToMany(Order::class);
+        return $this->belongsToMany(Order::class, OrderItem::class);
     }
 }

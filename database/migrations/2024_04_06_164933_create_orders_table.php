@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('table_id')->nullable();
             $table->date('date');
-            $table->double('total');
-            $table->double('discount');
-            $table->double('final');
+            $table->double('total')->default(0);
+            $table->double('discount')->default(0);
+            $table->double('final')->default(0);
             $table->tinyInteger('status')->default(0);
             $table->timestamps();
 

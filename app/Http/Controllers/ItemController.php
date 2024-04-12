@@ -50,8 +50,14 @@ class ItemController extends Controller
     }
 
 
-    public function all(){
-        $items = Item::latest()->get();
+    public function all(Request $request){
+
+        $status = $request->get('status');
+        if(!$status){
+            $status = 1;
+        }
+
+        $items = Item::where('status', $status)->latest()->get();
         return response()->json($items, 200);
     }
 
@@ -60,6 +66,22 @@ class ItemController extends Controller
             return response('', 404);
         }
         return Storage::response($item->image);
+    }
+
+    public function delete(Item $item){
+        if(!$item){
+            return response('', 404);
+        }
+        if($item->status > -1){
+            $item->status = -1;
+            $item->save();
+            return response('', 200);
+        }
+
+        if($item->status == -1){
+            $item->delete();
+            return response('', 200);
+        }
     }
 
 }
