@@ -84,4 +84,59 @@ class ItemController extends Controller
         }
     }
 
+    public function get(Item $item){
+        if(!$item){
+            return response('', 404);
+        }
+        return response()->json($item, 200);
+    }
+
+    public function update(Request $request, Item $item){
+        // return response()->json($request->all());
+        $rules = [
+            'title' => 'required|min:2|max:160',
+            'description' => 'nullable|max:5000',
+            'use_quantity' => 'string|in:true,false',
+            'non_veg' => 'string|in:true,false',
+            'price' => 'required|numeric'
+        ];
+        if($request->file('image')){
+            $rules['image'] = 'max:2048|mimes:png,jpg';
+        }
+        
+        $v = Validator::make($request->all(), $rules);
+        
+        if($v->fails()){
+            return response()->json($v->errors(), 400);
+        }
+
+        $file_name = null;
+        if($request->file('image')){
+            $file = $request->file('image');
+            if($file){
+                $date = date('d-m-Y');
+                $file_name = $file->store('uploads/' . $date .'/');
+            }
+        }
+
+        $item->title = $request->title;
+        $item->description = $request->description;
+        if($file_name){
+            $item->image = $file_name;
+        }elseif($request->post('image') == 'null'){
+            $item->image = null;
+        }    
+        $item->use_quantity = $request->use_quantity == "true";
+        $item->non_veg = $request->non_veg == "true";
+        $item->price = $request->price;
+
+        $result = $item->save();
+
+        if(!$result){
+            return response('', 500);
+        }
+        return response()->json($item, 201);
+
+    }
+
 }

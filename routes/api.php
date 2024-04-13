@@ -19,9 +19,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('/items')->group(function(){
     Route::get('/', [\App\Http\Controllers\ItemController::class, 'all']);
+    Route::get('/{item}', [\App\Http\Controllers\ItemController::class, 'get']);
+    Route::post('/{item}', [\App\Http\Controllers\ItemController::class, 'update']);
     Route::post('/', [\App\Http\Controllers\ItemController::class, 'create']);
     Route::get('/image/{item}', [\App\Http\Controllers\ItemController::class, 'image']);
-    Route::delete('/{item}',  [\App\Http\Controllers\ItemController::class, 'delete'] );
+    Route::delete('/{item}', [\App\Http\Controllers\ItemController::class, 'delete']);
 });
 
 
