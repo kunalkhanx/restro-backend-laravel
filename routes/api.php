@@ -30,6 +30,9 @@ Route::prefix('/items')->group(function(){
 Route::prefix('/waiters')->group(function(){
     Route::get('/', [\App\Http\Controllers\WaiterController::class, 'all']);
     Route::post('/', [\App\Http\Controllers\WaiterController::class, 'create']);
+    Route::get('/{waiter}', [\App\Http\Controllers\WaiterController::class, 'get']);
+    Route::post('/{waiter}', [\App\Http\Controllers\WaiterController::class, 'update']);
+    Route::delete('/{waiter}', [\App\Http\Controllers\WaiterController::class, 'delete']);
     Route::get('/image/{waiter}', [\App\Http\Controllers\WaiterController::class, 'image']);
 });
 

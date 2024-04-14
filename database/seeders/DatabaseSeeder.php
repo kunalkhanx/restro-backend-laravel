@@ -33,5 +33,24 @@ class DatabaseSeeder extends Seeder
         (10, 'Gulab Jamun', NULL, 'uploads/03-04-2024//HPOz9lUAG60BzXEr6ASFH7sOe4StUKqJqQv2pHDj.jpg', 0, 0, 0, 10.00, 1, '2024-04-03 15:23:26', '2024-04-03 15:23:26'),
         (11, 'Amul Sundae Ice Cream', NULL, 'uploads/03-04-2024//OqbDtcoz0V8seKNJivu9aIvJuqs4Ams5QKsT4C4G.jpg', 1, 0, 0, 35.00, 1, '2024-04-03 15:24:28', '2024-04-03 15:24:28'),
         (12, 'Coca Cola 600ml', NULL, 'uploads/03-04-2024//xykVd85ljNkaQO7wQN984oTKXAi3l1FGvdIxDWRr.jpg', 1, 0, 0, 45.00, 1, '2024-04-03 15:25:56', '2024-04-03 15:25:56');");
+
+
+        $waiter = new \App\Models\Waiter;
+        $waiter->name = 'Kunal Khan';
+        $waiter->sex = 'male';
+        $waiter->image = 'uploads/05-04-2024/9ko6bCH2xPuLJCD6rp21PI0jiBddwJeQIiLv9hLE.jpg';
+        $waiter->save();
+
+        $waiter = new \App\Models\Waiter;
+        $waiter->name = 'Sumana Parvin';
+        $waiter->sex = 'female';
+        $waiter->image = 'uploads/05-04-2024/KsPRuiGq30bo3pj4EYDtnLoNwmoKHBCmGuDJ3Myu.jpg';
+        $waiter->save();
+
+        $waiter = new \App\Models\Waiter;
+        $waiter->name = 'Souvik Chandra';
+        $waiter->sex = 'male';
+        $waiter->image = 'uploads/05-04-2024/9ko6bCH2xPuLJCD6rp21PI0jiBddwJeQIiLv9hLE.jpg';
+        $waiter->save();
     }
 }
