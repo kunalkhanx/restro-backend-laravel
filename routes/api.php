@@ -24,6 +24,7 @@ Route::prefix('/items')->group(function(){
     Route::post('/', [\App\Http\Controllers\ItemController::class, 'create']);
     Route::get('/image/{item}', [\App\Http\Controllers\ItemController::class, 'image']);
     Route::delete('/{item}', [\App\Http\Controllers\ItemController::class, 'delete']);
+    Route::patch('/{item}/restore', [\App\Http\Controllers\ItemController::class, 'restore']);
 });
 
 
@@ -34,6 +35,7 @@ Route::prefix('/waiters')->group(function(){
     Route::post('/{waiter}', [\App\Http\Controllers\WaiterController::class, 'update']);
     Route::delete('/{waiter}', [\App\Http\Controllers\WaiterController::class, 'delete']);
     Route::get('/image/{waiter}', [\App\Http\Controllers\WaiterController::class, 'image']);
+    Route::patch('/{waiter}/restore', [\App\Http\Controllers\WaiterController::class, 'restore']);
 });
 
 
@@ -43,6 +45,7 @@ Route::prefix('/tables')->group(function(){
     Route::post('/', [\App\Http\Controllers\TableController::class, 'create']);
     Route::delete('/{table}', [\App\Http\Controllers\TableController::class, 'delete']);
     Route::patch('/{table}', [\App\Http\Controllers\TableController::class, 'update']);
+    Route::patch('/{table}/restore', [\App\Http\Controllers\TableController::class, 'restore']);
 });
 
 Route::prefix('/orders')->group(function(){

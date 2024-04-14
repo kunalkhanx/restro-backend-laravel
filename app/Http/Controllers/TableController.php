@@ -76,4 +76,13 @@ class TableController extends Controller
         }
         return response()->json($table, 201);
     }
+
+    public function restore(Table $table){
+        if(!$table){
+            return response('', 404);
+        }
+        $table->status = 1;
+        $table->save();
+        return response('', 200);
+    }
 }

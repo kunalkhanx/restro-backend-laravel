@@ -139,4 +139,13 @@ class ItemController extends Controller
 
     }
 
+    public function restore(Item $item){
+        if(!$item){
+            return response('', 404);
+        }
+        $item->status = 1;
+        $item->save();
+        return response('', 200);
+    }
+
 }

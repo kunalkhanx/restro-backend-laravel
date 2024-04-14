@@ -121,4 +121,13 @@ class WaiterController extends Controller
         return response()->json($waiter, 201);
 
     }
+
+    public function restore(Waiter $waiter){
+        if(!$waiter){
+            return response('', 404);
+        }
+        $waiter->status = 1;
+        $waiter->save();
+        return response('', 200);
+    }
 }
