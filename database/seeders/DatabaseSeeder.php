@@ -52,5 +52,57 @@ class DatabaseSeeder extends Seeder
         $waiter->sex = 'male';
         $waiter->image = 'uploads/05-04-2024/9ko6bCH2xPuLJCD6rp21PI0jiBddwJeQIiLv9hLE.jpg';
         $waiter->save();
+
+
+        $table = new \App\Models\Table;
+        $table->table_code = 'A1';
+        $table->seats = 4;
+        $table->save();
+
+        $table = new \App\Models\Table;
+        $table->table_code = 'A2';
+        $table->seats = 6;
+        $table->save();
+
+        $table = new \App\Models\Table;
+        $table->table_code = 'B1';
+        $table->seats = 8;
+        $table->save();
+
+        $table = new \App\Models\Table;
+        $table->table_code = 'B2';
+        $table->seats = 2;
+        $table->save();
+
+        $table = new \App\Models\Table;
+        $table->table_code = 'C2';
+        $table->seats = 8;
+        $table->save();
+
+        $table = new \App\Models\Table;
+        $table->table_code = 'C2';
+        $table->seats = 2;
+        $table->save();
+
+        $table = new \App\Models\Table;
+        $table->table_code = 'C3';
+        $table->seats = 2;
+        $table->save();
+
+        $table = new \App\Models\Table;
+        $table->table_code = 'D1';
+        $table->seats = 2;
+        $table->save();
+
+        $table = new \App\Models\Table;
+        $table->table_code = 'D2';
+        $table->seats = 6;
+        $table->save();
+
+
+        $table = new \App\Models\Table;
+        $table->table_code = 'D3';
+        $table->seats = 6;
+        $table->save();
     }
 }

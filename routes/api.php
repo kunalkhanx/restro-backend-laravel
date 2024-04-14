@@ -39,7 +39,10 @@ Route::prefix('/waiters')->group(function(){
 
 Route::prefix('/tables')->group(function(){
     Route::get('/', [\App\Http\Controllers\TableController::class, 'all']);
+    Route::get('/{table}', [\App\Http\Controllers\TableController::class, 'get']);
     Route::post('/', [\App\Http\Controllers\TableController::class, 'create']);
+    Route::delete('/{table}', [\App\Http\Controllers\TableController::class, 'delete']);
+    Route::patch('/{table}', [\App\Http\Controllers\TableController::class, 'update']);
 });
 
 Route::prefix('/orders')->group(function(){
