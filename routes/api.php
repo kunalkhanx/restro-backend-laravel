@@ -50,8 +50,9 @@ Route::prefix('/tables')->group(function(){
 
 Route::prefix('/orders')->group(function(){
     Route::post('/', [\App\Http\Controllers\OrderController::class, 'create']);
+    Route::get('/{id}', [\App\Http\Controllers\OrderController::class, 'get']);
     Route::get('/', [\App\Http\Controllers\OrderController::class, 'browse']);
-    Route::get('/{order}', [\App\Http\Controllers\OrderController::class, 'get']);
+    
 });
 
 

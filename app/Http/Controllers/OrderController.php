@@ -25,13 +25,24 @@ class OrderController extends Controller
         return response('', 201);
     }
 
-
-    public function get(Order $order){
-        return response()->json($order->with('items')->with('payments')->get());
+    public function get($id){
+        $order = Order::where('id', $id)->with('items')->with('payments')->first();
+        if(!$order){
+            return response('', 404);
+        }
+        return response()->json($order);
     }
 
-    public function browse(){
-        $orders = Order::latest()->with('items')->with('payments')->paginate(15);
+    public function browse(Request $request){
+        // return response()->json(['status' => $request->get('status')]);
+        $query = Order::select();
+        // if($request->get('status') !== 'null'){
+        //     $query->where('status', $request->get('status'));
+        // }
+        if($request->get('dateFrom') && $request->get('dateFrom') != '' && $request->get('dateTo') && $request->get('dateTo') != ''){
+            $query->whereBetween('date', [date($request->get('dateFrom')), date($request->get('dateTo'))]);
+        }
+        $orders = $query->latest()->with('items')->with('payments')->paginate(15);
         return response()->json($orders);
     }
 }
