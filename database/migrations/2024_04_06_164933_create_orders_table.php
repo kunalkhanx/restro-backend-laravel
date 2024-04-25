@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('table_id')->nullable();
+            $table->unsignedBigInteger('waiter_id')->nullable();
             $table->date('date');
             $table->double('total')->default(0);
             $table->double('discount')->default(0);
@@ -22,6 +23,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('table_id')->references('id')->on('tables')->onDelete('set null');
+            $table->foreign('waiter_id')->references('id')->on('waiters')->onDelete('set null');
         });
     }
 

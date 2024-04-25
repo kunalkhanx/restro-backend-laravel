@@ -15,12 +15,16 @@ class OrderController extends Controller
         $order->total = $request->totalAmount;
         $order->final = $request->totalAmount;
         $order->status = $request->status;
+        $order->waiter_id = $request->waiter;
+        $order->table_id = $request->table;
         $result = $order->save();
         if(!$result){
             return response('', 400);
         }
         $order->items()->attach($request->items);
-        $order->payments()->createMany($request->payments);
+        if($request->payments){
+            $order->payments()->createMany($request->payments);
+        }       
 
         return response('', 201);
     }

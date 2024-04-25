@@ -17,6 +17,10 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
+Route::prefix('/management')->group(function(){
+    Route::get('/', [\App\Http\Controllers\ManagementController::class, 'index']);
+});
+
 Route::prefix('/items')->group(function(){
     Route::get('/', [\App\Http\Controllers\ItemController::class, 'all']);
     Route::get('/{item}', [\App\Http\Controllers\ItemController::class, 'get']);
@@ -52,7 +56,6 @@ Route::prefix('/orders')->group(function(){
     Route::post('/', [\App\Http\Controllers\OrderController::class, 'create']);
     Route::get('/{id}', [\App\Http\Controllers\OrderController::class, 'get']);
     Route::get('/', [\App\Http\Controllers\OrderController::class, 'browse']);
-    
 });
 
 
