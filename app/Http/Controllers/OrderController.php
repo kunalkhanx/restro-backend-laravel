@@ -38,11 +38,7 @@ class OrderController extends Controller
     }
 
     public function browse(Request $request){
-        // return response()->json(['status' => $request->get('status')]);
         $query = Order::select();
-        // if($request->get('status') !== 'null'){
-        //     $query->where('status', $request->get('status'));
-        // }
         if($request->get('dateFrom') && $request->get('dateFrom') != '' && $request->get('dateTo') && $request->get('dateTo') != ''){
             $query->whereBetween('date', [date($request->get('dateFrom')), date($request->get('dateTo'))]);
         }
@@ -60,7 +56,11 @@ class OrderController extends Controller
         if(!$result){
             return response('', 400);
         }
-        $order->items()->attach($request->items);
+        // $items = $order->items()->get();
+        // foreach($items as $item){
+            
+        // }
+        $order->items()->sync($request->items);
         return response('', 201);
     }
 }
