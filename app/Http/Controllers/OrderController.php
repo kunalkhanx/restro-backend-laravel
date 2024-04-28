@@ -30,7 +30,7 @@ class OrderController extends Controller
     }
 
     public function get($id){
-        $order = Order::where('id', $id)->with('items')->with('payments')->first();
+        $order = Order::where('id', $id)->with('items')->with('payments')->with('table')->first();
         if(!$order){
             return response('', 404);
         }
@@ -48,5 +48,19 @@ class OrderController extends Controller
         }
         $orders = $query->latest()->with('items')->with('payments')->paginate(15);
         return response()->json($orders);
+    }
+
+    public function addItems(Request $request, Order $order){
+        if(!$order){
+            return response('', 404);
+        }
+        $order->total = $order->total + $request->totalAmount;
+        $order->final = $order->final + $request->totalAmount;
+        $result = $order->save();
+        if(!$result){
+            return response('', 400);
+        }
+        $order->items()->attach($request->items);
+        return response('', 201);
     }
 }

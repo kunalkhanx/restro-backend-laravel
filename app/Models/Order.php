@@ -24,6 +24,10 @@ class Order extends Model
         return $this->hasMany(Payment::class);
     }
 
+    public function waiter():BelongsTo{
+        return $this->belongsTo(Waiter::class);
+    }
+
     // static function syncPrice(Order $order){
     //     $items = $order->items()->get();
     //     $total = 0;

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Table;
+use App\Models\Waiter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -55,6 +56,14 @@ class TableController extends Controller
             return response('', 404);
         }
         return response()->json($table, 200);
+    }
+
+    public function getAppData(Table $table, Waiter $waiter){
+        if(!$table || !$waiter){
+            return response('', 404);
+        }
+        $orders = $table->orders()->where('waiter_id', $waiter->id)->with('items')->get();
+        return response()->json(['orders' => $orders, 'table' => $table]);
     }
 
     public function update(Request $request, Table $table){

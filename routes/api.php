@@ -50,12 +50,16 @@ Route::prefix('/tables')->group(function(){
     Route::delete('/{table}', [\App\Http\Controllers\TableController::class, 'delete']);
     Route::patch('/{table}', [\App\Http\Controllers\TableController::class, 'update']);
     Route::patch('/{table}/restore', [\App\Http\Controllers\TableController::class, 'restore']);
+
+    Route::get('/app-table-data/{table}/{waiter}', [\App\Http\Controllers\TableController::class, 'getAppData']);
 });
 
 Route::prefix('/orders')->group(function(){
     Route::post('/', [\App\Http\Controllers\OrderController::class, 'create']);
     Route::get('/{id}', [\App\Http\Controllers\OrderController::class, 'get']);
     Route::get('/', [\App\Http\Controllers\OrderController::class, 'browse']);
+
+    Route::patch('/{order}/add-items', [\App\Http\Controllers\OrderController::class, 'addItems']);
 });
 
 
