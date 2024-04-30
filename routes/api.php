@@ -59,6 +59,7 @@ Route::prefix('/orders')->group(function(){
     Route::get('/{id}', [\App\Http\Controllers\OrderController::class, 'get']);
     Route::get('/', [\App\Http\Controllers\OrderController::class, 'browse']);
 
+    Route::patch('/{order}', [\App\Http\Controllers\OrderController::class, 'update']);
     Route::patch('/{order}/add-items', [\App\Http\Controllers\OrderController::class, 'addItems']);
 });
 

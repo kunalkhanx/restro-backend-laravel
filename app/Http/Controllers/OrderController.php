@@ -12,11 +12,17 @@ class OrderController extends Controller
 
         $order = new Order;
         $order->date = date('Y-m-d');
-        $order->total = $request->totalAmount;
-        $order->final = $request->totalAmount;
         $order->status = $request->status;
         $order->waiter_id = $request->waiter;
         $order->table_id = $request->table;
+
+        $totalAmount = 0;
+        foreach($request->items as $item){
+            $totalAmount += ((int) $item['price']) * ((int) $item['quantity']);
+        }
+        $order->total = $totalAmount;
+        $order->final = $totalAmount;
+
         $result = $order->save();
         if(!$result){
             return response('', 400);
@@ -26,7 +32,20 @@ class OrderController extends Controller
             $order->payments()->createMany($request->payments);
         }       
 
-        return response('', 201);
+        return response()->json($order, 201);
+    }
+
+    public function update(Request $request, Order $order){
+        $order->status = $request->status;
+        $result = $order->save();
+        if(!$result){
+            return response('', 400);
+        }
+        if($request->payments){
+            $order->payments()->createMany($request->payments);
+        }       
+
+        return response()->json($order, 201);
     }
 
     public function get($id){
@@ -50,16 +69,16 @@ class OrderController extends Controller
         if(!$order){
             return response('', 404);
         }
-        $order->total = $order->total + $request->totalAmount;
-        $order->final = $order->final + $request->totalAmount;
+        $totalAmount = 0;
+        foreach($request->items as $item){
+            $totalAmount += ((int) $item['price']) * ((int) $item['quantity']);
+        }
+        $order->total = $totalAmount;
+        $order->final = $totalAmount;
         $result = $order->save();
         if(!$result){
             return response('', 400);
         }
-        // $items = $order->items()->get();
-        // foreach($items as $item){
-            
-        // }
         $order->items()->sync($request->items);
         return response('', 201);
     }

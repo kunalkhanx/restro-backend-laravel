@@ -53,6 +53,10 @@ class DatabaseSeeder extends Seeder
         $waiter->image = 'uploads/05-04-2024/9ko6bCH2xPuLJCD6rp21PI0jiBddwJeQIiLv9hLE.jpg';
         $waiter->save();
 
+        $table = new \App\Models\Table;
+        $table->table_code = 'Cash';
+        $table->seats = 1;
+        $table->save();
 
         $table = new \App\Models\Table;
         $table->table_code = 'A1';
