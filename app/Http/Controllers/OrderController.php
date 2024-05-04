@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 class OrderController extends Controller
 {
@@ -61,7 +60,7 @@ class OrderController extends Controller
         if($request->get('dateFrom') && $request->get('dateFrom') != '' && $request->get('dateTo') && $request->get('dateTo') != ''){
             $query->whereBetween('date', [date($request->get('dateFrom')), date($request->get('dateTo'))]);
         }
-        $orders = $query->latest()->with('items')->with('payments')->paginate(15);
+        $orders = $query->latest()->with('items')->with('payments')->with('waiter')->with('table')->paginate(15);
         return response()->json($orders);
     }
 

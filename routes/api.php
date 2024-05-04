@@ -17,6 +17,12 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
+Route::prefix('/dashboard')->group(function(){
+    Route::get('/', [\App\Http\Controllers\DashboardController::class, 'index']);
+    Route::get('/expo/{waiter}', [\App\Http\Controllers\DashboardController::class, 'expo']);
+    Route::post('/search', [\App\Http\Controllers\DashboardController::class, 'search']);
+});
+
 Route::prefix('/management')->group(function(){
     Route::get('/', [\App\Http\Controllers\ManagementController::class, 'index']);
 });
@@ -36,6 +42,7 @@ Route::prefix('/waiters')->group(function(){
     Route::get('/', [\App\Http\Controllers\WaiterController::class, 'all']);
     Route::post('/', [\App\Http\Controllers\WaiterController::class, 'create']);
     Route::get('/{waiter}', [\App\Http\Controllers\WaiterController::class, 'get']);
+    Route::get('/{waiter}/login', [\App\Http\Controllers\WaiterController::class, 'login']);
     Route::post('/{waiter}', [\App\Http\Controllers\WaiterController::class, 'update']);
     Route::delete('/{waiter}', [\App\Http\Controllers\WaiterController::class, 'delete']);
     Route::get('/image/{waiter}', [\App\Http\Controllers\WaiterController::class, 'image']);

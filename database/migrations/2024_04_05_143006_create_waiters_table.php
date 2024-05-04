@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('sex');
             $table->string('image')->nullable();
+            $table->date('last_login')->nullable();
             $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });

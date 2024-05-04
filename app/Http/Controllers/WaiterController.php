@@ -84,6 +84,15 @@ class WaiterController extends Controller
         return response()->json($waiter);
     }
 
+    public function login(Waiter $waiter){
+        if(!$waiter){
+            return response('', 404);
+        }
+        $waiter->last_login = date('Y-m-d');
+        $waiter->save();
+        return response('', 200);
+    }
+
 
     public function update(Request $request, Waiter $waiter){
         $rules = [

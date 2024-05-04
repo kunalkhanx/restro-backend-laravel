@@ -62,7 +62,8 @@ class TableController extends Controller
         if(!$table || !$waiter){
             return response('', 404);
         }
-        $orders = $table->orders()->where('waiter_id', $waiter->id)->with('items')->get();
+        $date = date('Y-m-d');
+        $orders = $table->orders()->where('waiter_id', $waiter->id)->where('date', $date)->with('items')->get();
         return response()->json(['orders' => $orders, 'table' => $table]);
     }
 
