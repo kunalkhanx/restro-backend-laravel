@@ -20,6 +20,12 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
+        $user = new \App\Models\User;
+        $user->name = 'Admin';
+        $user->email = 'admin@example.com';
+        $user->password = bcrypt('12345678');
+        $user->save();
+
         DB::insert("INSERT INTO `items` (`id`, `title`, `description`, `image`, `use_quantity`, `quantity`, `non_veg`, `price`, `status`, `created_at`, `updated_at`) VALUES
         (1, 'Samosa (2 PCS)', NULL, 'uploads/03-04-2024//5Wc3Jv24XtsfjQ8cEsg4B1fySSyJ95AIZobiGco4.jpg', 0, 0, 0, 36.00, 1, '2024-04-03 15:16:37', '2024-04-03 15:16:37'),
         (2, 'Aloo Paratha (2 PCS)', NULL, 'uploads/03-04-2024//0LypPpvPvUegUmCJ1zGAyYabL8QQ2XaqanTvfWRd.jpg', 0, 0, 0, 60.00, 1, '2024-04-03 15:17:31', '2024-04-03 15:17:31'),
