@@ -33,6 +33,12 @@ Route::middleware('auth:api')->group(function(){
         Route::patch('/profile', [\App\Http\Controllers\UserController::class, 'updateProfile']);
     });
 
+    Route::prefix('/settings')->group(function(){
+        Route::post('/', [\App\Http\Controllers\SettingController::class, 'store']);
+        Route::get('/', [\App\Http\Controllers\SettingController::class, 'all']);
+        Route::patch('/', [\App\Http\Controllers\SettingController::class, 'storBulk']);
+    });    
+
 });
 
 Route::prefix('/dashboard')->group(function(){

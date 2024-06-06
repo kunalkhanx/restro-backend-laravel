@@ -114,5 +114,24 @@ class DatabaseSeeder extends Seeder
         $table->table_code = 'D3';
         $table->seats = 6;
         $table->save();
+
+
+        $setting = new \App\Models\Setting;
+        $setting->group = 'TAX';
+        $setting->setting_key = 'CGST';
+        $setting->setting_value = 0;
+        $setting->save();
+
+        $setting = new \App\Models\Setting;
+        $setting->group = 'TAX';
+        $setting->setting_key = 'SGST';
+        $setting->setting_value = 0;
+        $setting->save();
+
+        $setting = new \App\Models\Setting;
+        $setting->group = 'PAYMENT';
+        $setting->setting_key = 'PAYMENT_METHODS';
+        $setting->setting_value = json_encode(['Cash', 'UPI', "Card"]);
+        $setting->save();
     }
 }
