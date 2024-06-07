@@ -18,6 +18,7 @@ return new class extends Migration
             $table->date('date');
             $table->double('total')->default(0);
             $table->double('discount')->default(0);
+            $table->json('tax')->nullable();
             $table->double('final')->default(0);
             $table->tinyInteger('status')->default(0);
             $table->timestamps();

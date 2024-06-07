@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -20,7 +21,15 @@ class OrderController extends Controller
             $totalAmount += ((int) $item['price']) * ((int) $item['quantity']);
         }
         $order->total = $totalAmount;
-        $order->final = $totalAmount;
+        $settings = Setting::whereIn('setting_key', ['SGST', 'CGST'])->get();
+        $tax = [];
+        $final = 0;
+        foreach($settings as $setting){
+            $tax[$setting->setting_key] = [(int) $setting->setting_value, round(($totalAmount * $setting->setting_value) / 100)];
+            $final += (int) $tax[$setting->setting_key][1];
+        }
+        $order->tax = json_encode($tax);
+        $order->final = round($totalAmount + $final);
 
         $result = $order->save();
         if(!$result){

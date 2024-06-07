@@ -35,11 +35,12 @@ Route::middleware('auth:api')->group(function(){
 
     Route::prefix('/settings')->group(function(){
         Route::post('/', [\App\Http\Controllers\SettingController::class, 'store']);
-        Route::get('/', [\App\Http\Controllers\SettingController::class, 'all']);
         Route::patch('/', [\App\Http\Controllers\SettingController::class, 'storBulk']);
     });    
 
 });
+
+Route::get('/settings', [\App\Http\Controllers\SettingController::class, 'all']);
 
 Route::prefix('/dashboard')->group(function(){
     Route::get('/', [\App\Http\Controllers\DashboardController::class, 'index']);
